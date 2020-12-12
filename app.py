@@ -9,10 +9,9 @@ from resources.varaus import VarausListResource, VarausResource, VarausPublishRe
 
 
 def create_app():
-
     app = Flask(__name__)
     app.config.from_object(Config)
-
+    app.app_context().push()
     register_extensions(app)
     register_resources(app)
 
