@@ -18,14 +18,14 @@ class VarausListResource(Resource):
         return{'data': data}, HTTPStatus.OK
 
     def post(self):
-        data = request.get_json
+        data = request.get_json()
 
-        varaus = Varaus(tila=data['tila'],
-                        paiva=data['päivä'],
-                        aika=data['aika'],
-                        henkiloita=data['henkilöitä'],
-                        kuka=data['kuka'],
-                        sahkoposti=data['sähköposti'],)
+        varaus = Varaus(tila=data["tila"],
+                        paiva=data["paiva"],
+                        aika=data["aika"],
+                        henkiloita=data["henkiloita"],
+                        kuka=data["kuka"],
+                        sahkoposti=data["sahkoposti"])
 
         varaus_list.append(varaus)
 
@@ -44,7 +44,7 @@ class VarausResource(Resource):
         return varaus.data, HTTPStatus.OK
 
     def put(self, varaus_id):
-        data = request.get_json
+        data = request.get_json()
 
         varaus = next((varaus for varaus in varaus_list if varaus.id == varaus_id), None)
 

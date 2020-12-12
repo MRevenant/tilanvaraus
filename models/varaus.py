@@ -8,6 +8,7 @@ def get_last_id():
         return 1
     return last_varaus.id + 1
 
+
 class Varaus:
 
     def __init__(self, tila, paiva, aika, henkiloita, kuka, sahkoposti):
@@ -18,16 +19,16 @@ class Varaus:
         self.henkiloita = henkiloita
         self.kuka = kuka
         self.sahkoposti = sahkoposti
-        self.is_publish = True
+        self.is_publish = False
 
     @property
     def data(self):
-        return{
-            "id": self.id,
-            "tila": self.tila,
-            "päivä": self.paiva,
-            "aika": self.aika,
-            "henkilöitä": self.henkiloita,
-            "kuka": self.kuka,
-            "sähköposti": self.sahkoposti
+        return {
+            'id': self.id,
+            'tila': self.tila,
+            'paiva': self.paiva,
+            'aika': self.aika,
+            'henkiloita': self.henkiloita,
+            'kuka': self.kuka,
+            'sahkoposti': self.sahkoposti
         }
