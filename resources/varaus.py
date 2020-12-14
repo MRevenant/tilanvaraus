@@ -8,27 +8,21 @@ from models.varaus import Varaus, varaus_list
 class VarausListResource(Resource):
 
     def get(self):
-
         data = []
-
         for varaus in varaus_list:
             if varaus.is_publish is True:
                 data.append(varaus.data)
-
         return{'data': data}, HTTPStatus.OK
 
     def post(self):
         data = request.get_json()
-
         varaus = Varaus(tila=data["tila"],
                         paiva=data["paiva"],
                         aika=data["aika"],
                         henkiloita=data["henkiloita"],
                         kuka=data["kuka"],
                         sahkoposti=data["sahkoposti"])
-
         varaus_list.append(varaus)
-
         return varaus.data, HTTPStatus.CREATED
 
 
