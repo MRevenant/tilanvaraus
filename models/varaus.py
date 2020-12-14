@@ -16,7 +16,7 @@ class Varaus(db.Model):
 
     id = db.Column(db.Integer(), primary_key=True)
     tila = db.Column(db.String(100), nullable=False)
-    paiva = db.Column((db.String(10)), nullable=False)
+    paiva = db.Column(db.Integer, nullable=False)
     aika = db.Column((db.String(5)), nullable=False)
     henkiloita = db.Column(db.Integer)
     kuka = db.Column((db.String(25)), nullable=False)
