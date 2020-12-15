@@ -13,7 +13,7 @@ from schemas.varaus import VarausSchema
 
 user_schema = UserSchema()
 user_public_schema = UserSchema(exclude=('email',))
-instruction_list_schema = VarausSchema(many=True)
+varaus_list_schema = VarausSchema(many=True)
 
 
 class UserListResource(Resource):
@@ -90,7 +90,7 @@ class MeResource(Resource):
 class UserVarausListResource(Resource):
 
     @jwt_optional
-    @use_kwargs({'visibility':fields.Str(missing='public')})
+    @use_kwargs({'visibility': fields.Str(missing='public')})
     def get(self, username, visibility):
 
         user = User.get_by_username(username=username)

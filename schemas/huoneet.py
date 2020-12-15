@@ -13,3 +13,9 @@ class HuoneetSchema(Schema):
 
     author = fields.Nested(UserSchema, attribute='user', dumb_only=True,
                            only=['id', 'username'])
+
+    @post_dump(pass_many=True)
+    def wrap(self, data, many, **kwargs):
+        if many:
+            return {'data': data}
+        return data

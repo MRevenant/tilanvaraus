@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields, post_dump, validate, validates, ValidationError
-from schemas.user import  UserSchema
+from schemas.user import UserSchema
 
 
 class VarausSchema(Schema):

@@ -54,8 +54,6 @@ class HuoneetResource(Resource):
 
         return huone.data(), HTTPStatus.OK
 
-
-
     @jwt_required
     def put(self, huoneet_id):
 
@@ -73,7 +71,6 @@ class HuoneetResource(Resource):
         huone.save()
 
         return huone.data(), HTTPStatus
-
 
     @jwt_required
     def patch(self, huoneet_id):
