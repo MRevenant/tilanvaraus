@@ -16,9 +16,7 @@ class VarausListResource(Resource):
     def get(self):
 
         varaukset = Varaus.get_all_published()
-        data = []
-        for varaus in varaukset:
-            data.append(varaus.data())
+
         return varaus_list_schema.dump(varaukset).data, HTTPStatus.OK
 
     @jwt_required
@@ -113,6 +111,23 @@ class VarausResource(Resource):
 
         return varaus.data, HTTPStatus.OK
 
+    @jwt_required
+    def delete(self, varaus_id):
+        varaus = Varaus.get_by_id(varaus_id=varaus_id)
+
+        if varaus is None:
+            return {'message': 'Reservation not found'}, HTTPStatus.NOT_FOUND
+
+        current_user = get_jwt_identity()
+
+        if current_user != varaus.user_id:
+            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
+
+        varaus.is_publish = False
+        varaus.delete(self)
+
+        return {}, HTTPStatus.NO_CONTENT
+
 
 class VarausPublishResource(Resource):
 
@@ -122,9 +137,15 @@ class VarausPublishResource(Resource):
         if varaus is None:
             return{'message': 'Reservation not found'}, HTTPStatus.NOT_FOUND
 
-        varaus.is_publish = True
+        current_user = get_jwt_identity()
 
-        return(), HTTPStatus.CREATED
+        if current_user != varaus.user_id:
+            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
+
+        varaus.is_publish = True
+        varaus.save()
+
+        return{}, HTTPStatus.CREATED
 
     @jwt_required
     def delete(self, varaus_id):
@@ -138,6 +159,7 @@ class VarausPublishResource(Resource):
         if current_user != varaus.user_id:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
+        varaus.is_publish = False
         varaus.delete()
 
-        return (), HTTPStatus.NO_CONTENT
+        return {}, HTTPStatus.NO_CONTENT

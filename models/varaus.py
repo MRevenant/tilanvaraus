@@ -7,8 +7,8 @@ class Varaus(db.Model):
 
     id = db.Column(db.Integer(), primary_key=True)
     tila = db.Column(db.String(100), nullable=False)
-    paiva = db.Column(db.Integer, nullable=False)
-    aika = db.Column((db.String(5)), nullable=False)
+    paiva = db.Column(db.Integer,)
+    aika = db.Column(db.Integer,)
     henkiloita = db.Column(db.Integer)
     kuka = db.Column((db.String(25)), nullable=False)
     sahkoposti = db.Column((db.String(50)), nullable=False)
