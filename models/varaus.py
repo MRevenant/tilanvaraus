@@ -6,12 +6,12 @@ class Varaus(db.Model):
     __tablename__ = 'varaus'
 
     id = db.Column(db.Integer(), primary_key=True)
-    tila = db.Column(db.String(100), nullable=False)
-    paiva = db.Column(db.Integer,)
-    aika = db.Column(db.Integer,)
+    tila = db.Column(db.String(100))
+    paiva = db.Column(db.String(100))
+    aika = db.Column(db.Integer)
     henkiloita = db.Column(db.Integer)
-    kuka = db.Column((db.String(25)), nullable=False)
-    sahkoposti = db.Column((db.String(50)), nullable=False)
+    kuka = db.Column((db.String(25)))
+    sahkoposti = db.Column((db.String(50)))
     is_publish = db.Column(db.Boolean(), default=True)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(),

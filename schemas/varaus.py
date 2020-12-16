@@ -9,8 +9,8 @@ class VarausSchema(Schema):
     id = fields.Integer(dump_only=True)
     tila = fields.String(required=True, validate=[validate.Length(max=10)])
     paiva = fields.String(validate=[validate.Length(max=10)])
-    aika = fields.Integer(dump_only=True)
-    henkiloita = fields.Integer(dump_only=True)
+    aika = fields.Integer()
+    henkiloita = fields.Integer()
     kuka = fields.String(validate=[validate.Length(max=50)])
     sahkoposti = fields.String(validate=[validate.Length(max=50)])
 
