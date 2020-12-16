@@ -16,6 +16,10 @@ class Huoneet(db.Model):
         return cls.query.all()
 
     @classmethod
+    def get_by_id(cls, huone_id):
+        return cls.query.filter_by(id=huone_id).all()
+
+    @classmethod
     def get_all_by_user(cls, user_id):
         return cls.query.filter_by(user_id=user_id).all()
 

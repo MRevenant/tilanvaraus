@@ -39,27 +39,21 @@ class HuoneListResource(Resource):
 
 class HuoneetResource(Resource):
 
-    @jwt_optional
-    def get(self, huoneet_id):
+    def get(self, huone_id):
 
-        huone = Huoneet.get_by_id(huoneet_id=huoneet_id)
+        huone = Huoneet.get_by_id(huone_id=huone_id)
 
         if huone is None:
-             return {'message': 'Room not found'}, HTTPStatus.NOT_FOUND
-
-        current_user = get_jwt_identity()
-
-        if huone.is_publish == False and huone.user_id != current_user:
-             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
+            return {'message': 'Room not found'}, HTTPStatus.NOT_FOUND
 
         return huone.data(), HTTPStatus.OK
 
     @jwt_required
-    def put(self, huoneet_id):
+    def put(self, huone_id):
 
         json_data = request.get_json()
 
-        huone = Huoneet.get_by_id(huoneet_id=huoneet_id)
+        huone = Huoneet.get_by_id(huone_id=huone_id)
 
         if huone is None:
             return {'message': 'Room not found'}, HTTPStatus.NOT_FOUND
@@ -73,7 +67,7 @@ class HuoneetResource(Resource):
         return huone.data(), HTTPStatus
 
     @jwt_required
-    def patch(self, huoneet_id):
+    def patch(self, huone_id):
 
         json_data = request.get_json()
 
@@ -82,7 +76,7 @@ class HuoneetResource(Resource):
         if errors:
             return {'message': 'Room not found'}, HTTPStatus.FORBIDDEN
 
-        huone = Huoneet.get_by_id(huoneet_id=huoneet_id)
+        huone = Huoneet.get_by_id(huone_id=huone_id)
 
         if huone is None:
             return {'message': 'Room not found'}, HTTPStatus.NOT_FOUND

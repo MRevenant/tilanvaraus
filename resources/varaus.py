@@ -78,12 +78,7 @@ class VarausResource(Resource):
         if varaus is None:
             return {'message': 'Reservation not found'}, HTTPStatus.NOT_FOUND
 
-        current_user = get_jwt_identity()
-
-        if varaus.is_publish == False and varaus.user_id != current_user:
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
-
-        return varaus.data(), HTTPStatus.OK
+        return varaus.data, HTTPStatus.OK
 
     @jwt_required
     def put(self, varaus_id):
